@@ -1,0 +1,104 @@
+*{
+    margin: 0;
+}
+
+.bodyy{
+    background-image: url("images/bgimage.jpg");
+    height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.pagehead{
+   
+    text-align: right;    
+    padding: 8rem;
+    
+    
+}
+.topnav {
+    overflow: hidden;   
+    /*background-color: #333;*/
+    position: fixed;
+  }
+  
+  .topnav a {
+    float: left;
+    margin-left: 250px;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 15px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .topnav a.active {
+    background-color: #3771b3;
+    color: white;
+  }
+
+.project{
+    /*color: rgb(255, 255, 255);*/
+    padding-bottom: 2rem;
+    font-size: 100px;
+    background: -webkit-linear-gradient(rgb(255, 255, 255),#3771b3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.contents{
+    text-align: right;
+    color: azure;
+    font-family: 'Times New Roman', Times, serif ;
+    font-style: italic;
+    font-size: 1.5rem;
+}
+
+.details{
+    font-size: x-large;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(76, 114, 111);
+}
+
+.content h2{
+    font-size: xx-large;
+    padding: (2,2,2);
+    font-family: Arial, Helvetica, sans-serif;
+    padding-bottom: 1rem;
+    color: rgb(76, 114, 111);
+}
+
+.exp{
+    text-align: left;
+    background-color: rgb(221, 212, 238);
+    padding: 3rem;
+}
+
+.exp h2{
+    font-size: xx-large;
+    padding: 1rem;
+    background-color: rgb(173, 151, 173);
+    font-family: Arial, Helvetica, sans-serif;
+    padding-bottom: 1rem;
+    color: rgb(56, 56, 56);
+}
+
+img{
+    max-width: 100%;
+    padding: 2rem;
+}
+
+.vedio{
+    padding: 2rem;
+}
