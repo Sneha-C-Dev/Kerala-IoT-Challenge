@@ -12,7 +12,7 @@
     <div class="topnav">
         <a href="index.html">Home</a>
         <a class="active" href="experiment.html">Experiment</a>
-        <a href="https://github.com/Sneha-C-Dev/Kerala-IoT-Challenge">Check my GitHub</a>
+        <a href="https://sneha-c-dev.github.io/Kerala-IoT-Challenge/">Check my GitHub</a>
         <a href="about.html">About</a>
       </div>    
     
@@ -650,133 +650,190 @@
                             <div class="expdetails">
                                 <h1>Code</h1>
                                 <p class="code">
-                                    #include <IRremote.h>
-                                        int RECV_PIN = 11;<br>
-                                        int LED1 = 2;<br>
-                                        int LED2 = 3;<br>
-                                        int LED3 = 4;<br>
-                                        int LED4 = 5;<br>
-                                        int LED5 = 6;<br>
-                                        int LED6 = 7;<br>
-                                        long on1  = 0x00FF6897;<br>
-                                        long off1 = 0x00FF9867;<br>
-                                        long on2 = 0x00FFB04F;<br>
-                                        long off2 = 0x00FF30CF;<br>
-                                        long on3 = 0x00FF18E7;<br>
-                                        long off3 = 0x00FF7A85;<br>
-                                        long on4 = 0x00FF10EF;<br>
-                                        long off4 = 0x00FF38C7;<br>
-                                        long on5 = 0x00FF5AA5;<br>
-                                        long off5 = 0x00FF42BD;<br>
-                                        long on6 = 0x00FF4AB5;<br>
-                                        long off6 = 0x00FF52AD;<br>
-                                        IRrecv irrecv(RECV_PIN);<br>
-                                        decode_results results;<br>
-                                        // Dumps out the decode_results structure.<br>
-                                        // Call this after IRrecv::decode()<br>
-                                        // void * to work around compiler issue<br>
-                                        //void dump(void *v) {<br>
-                                        //  decode_results *results = (decode_results *)v<br>
-                                        void dump(decode_results *results) {<br>
-                                          int count = results->rawlen;<br>
-                                          if (results->decode_type == UNKNOWN) <br>
+                                    #include <IRremote.h>// IR Remote Library<br>
+                                        <br>
+                                        int RECV_PIN = 11;// initialize the digital pin 11 where you connect output pin of TSOP1838<br>
+                                        int LED1 = 2;// initialize digital pin 2<br>
+                                        int LED2 = 3;// initialize digital pin 3<br>
+                                        int LED3 = 4;// initialize digital pin 4<br>
+                                        int LED4 = 5;// initialize digital pin 5<br>
+                                        int LED5 = 6;// initialize digital pin 6<br>
+                                        int LED6 = 7;// initialize digital pin 7<br>
+                                        int LEDon[] = {0, 0, 0, 0, 0, 0};// the initial state of LEDs is OFF (zero)<br>
+                                        <br>
+                                        long btn1 = 0x001FE50AF;// code from button 1<br>
+                                        long btn2 = 0x001FED827;// code from button 2<br>
+                                        long btn3 = 0x001FEF807;// code from button 3<br>
+                                        long btn4 = 0x001FE30CF;// code from button 4<br>
+                                        long btn5 = 0x001FEB04F;// code from button 5<br>
+                                        long btn6 = 0x001FE708F;// code from button 6<br>
+                                        <br>
+                                        IRrecv irrecv(RECV_PIN);// define IR Receiver<br>
+                                        decode_results results;// results objects<br>
+                                        <br>
+                                        void dump(decode_results *results) <br>
+                                        {<br>
+                                            int count = results->rawlen;<br>
+                                            if (results->decode_type == UNKNOWN) <br>
                                             {<br>
-                                             Serial.println("Could not decode message");<br>
+                                                Serial.println("Could not decode message");<br>
                                             } <br>
-                                          else <br>
-                                           {<br>
-                                            if (results->decode_type == NEC) <br>
-                                              {<br>
-                                               Serial.print("Decoded NEC: ");<br>
-                                              } <br>
-                                            else if (results->decode_type == SONY) <br>
-                                              {<br>
-                                               Serial.print("Decoded SONY: ");<br>
-                                              } <br>
-                                            else if (results->decode_type == RC5) <br>
-                                              {<br>
-                                               Serial.print("Decoded RC5: ");<br>
-                                              } <br>
-                                            else if (results->decode_type == RC6) <br>
-                                              {<br>
-                                               Serial.print("Decoded RC6: ");<br>
-                                              }<br>
-                                             Serial.print(results->value, HEX);<br>
-                                             Serial.print(" (");<br>
-                                             Serial.print(results->bits, DEC);<br>
-                                             Serial.println(" bits)");<br>
-                                           }<br>
-                                             Serial.print("Raw (");<br>
-                                             Serial.print(count, DEC);<br>
-                                             Serial.print("): ");<br>
-                                         for (int i = 0; i < count; i++) <br>
-                                             {<br>
-                                              if ((i % 2) == 1) {<br>
-                                              Serial.print(results->rawbuf[i]*USECPERTICK, DEC);<br>
-                                             } <br>
-                                            else  <br>
-                                             {<br>
-                                              Serial.print(-(int)results->rawbuf[i]*USECPERTICK, DEC);<br>
-                                             }<br>
-                                            Serial.print(" ");<br>
-                                             }<br>
-                                              Serial.println("");<br>
-                                             }<br>
+                                            else <br>
+                                            {<br>
+                                                if (results->decode_type == NEC) <br>
+                                                {<br>
+                                                    Serial.print("Decoded NEC: ");<br>
+                                                } <br>
+                                                else if (results->decode_type == SONY) <br>
+                                                {<br>
+                                                    Serial.print("Decoded SONY: ");<br>
+                                                } <br>
+                                                else if (results->decode_type == RC5) <br>
+                                                {<br>
+                                                    Serial.print("Decoded RC5: ");<br>
+                                                } <br>
+                                                else if (results->decode_type == RC6) <br>
+                                                {<br>
+                                                    Serial.print("Decoded RC6: ");<br>
+                                                }<br>
+                                                Serial.print(results->value, HEX);<br>
+                                                Serial.print(" (");<br>
+                                                Serial.print(results->bits, DEC);<br>
+                                                Serial.println(" bits)");<br>
+                                            }<br>
+                                            <br>
+                                            Serial.print("Raw (");<br>
+                                            Serial.print(count, DEC);<br>
+                                            Serial.print("): ");<br>
+                                            <br>
+                                            for (int i=0; i<count; i++) <br>
+                                            {<br>
+                                                if ((i%2)== 1) <br>
+                                                { <br>
+                                                    Serial.print(results->rawbuf[i]*USECPERTICK, DEC);<br>
+                                                } <br>
+                                                else <br> 
+                                                {<br>
+                                                    Serial.print(-(int)results->rawbuf[i]*USECPERTICK, DEC);<br>
+                                                }<br>
+                                                Serial.print(" ");<br>
+                                            }<br>
+                                            <br>
+                                            Serial.println("");<br>
+                                        }<br>
+                                        <br>
                                         void setup()<br>
-                                         {<br>
-                                          pinMode(RECV_PIN, INPUT);  <br> 
-                                          pinMode(LED1, OUTPUT);<br>
-                                          pinMode(LED2, OUTPUT);<br>
-                                          pinMode(LED3, OUTPUT);<br>
-                                          pinMode(LED4, OUTPUT);<br>
-                                          pinMode(LED5, OUTPUT);<br>
-                                          pinMode(LED6, OUTPUT); <br> 
-                                          pinMode(13, OUTPUT);<br>
-                                          Serial.begin(9600);<br>
-                                           irrecv.enableIRIn(); // Start the receiver<br>
-                                         }<br>
+                                        {<br>
+                                            pinMode(RECV_PIN, INPUT); <br>  
+                                            pinMode(LED1, OUTPUT);<br>
+                                            pinMode(LED2, OUTPUT);<br>
+                                            pinMode(LED3, OUTPUT);<br>
+                                            pinMode(LED4, OUTPUT);<br>
+                                            pinMode(LED5, OUTPUT);<br>
+                                            pinMode(LED6, OUTPUT);  <br>
+                                            pinMode(13, OUTPUT);<br>
+                                            Serial.begin(9600);<br>
+                                            irrecv.enableIRIn(); // Start the receiver<br>
+                                        }<br>
+                                        <br>
                                         int on = 0;<br>
                                         unsigned long last = millis();<br>
+                                        <br>
                                         void loop() <br>
                                         {<br>
-                                          if (irrecv.decode(&results)) <br>
-                                           {<br>
-                                            // If it's been at least 1/4 second since the last<br>
-                                            // IR received, toggle the relay<br>
-                                            if (millis() - last > 250) <br>
-                                              {<br>
-                                               on =!on;
-                                        //       digitalWrite(8, on? HIGH: LOW);<br>
-                                               digitalWrite(13, on? HIGH: LOW);<br>
-                                               dump(&results);<br>
-                                              }<br>
-                                            if (results.value == on1 )<br>
-                                               digitalWrite(LED1, HIGH);<br>
-                                            if (results.value == off1 )<br>
-                                               digitalWrite(LED1, LOW); <br>
-                                            if (results.value == on2 )<br>
-                                               digitalWrite(LED2, HIGH);<br>
-                                            if (results.value == off2 )<br>
-                                               digitalWrite(LED2, LOW);<br>
-                                            if (results.value == on3 )<br>
-                                               digitalWrite(LED3, HIGH);<br>
-                                            if (results.value == off3 )<br>
-                                               digitalWrite(LED3, LOW);<br>
-                                            if (results.value == on4 )<br>
-                                               digitalWrite(LED4, HIGH);<br>
-                                            if (results.value == off4 )<br>
-                                               digitalWrite(LED4, LOW); <br>
-                                            if (results.value == on5 )<br>
-                                               digitalWrite(LED5, HIGH);<br>
-                                            if (results.value == off5 )<br>
-                                               digitalWrite(LED5, LOW); <br>
-                                            if (results.value == on6 )<br>
-                                               digitalWrite(LED6, HIGH);<br>
-                                            if (results.value == off6 )<br>
-                                               digitalWrite(LED6, LOW);    <br>    
-                                            last = millis();      <br>
-                                        irrecv.resume(); // Receive the next value<br>
-                                          }<br>
+                                            if (irrecv.decode(&results))<br>
+                                            {<br>
+                                                // If it's been at least 1/4 second since the last<br>
+                                                // IR received, toggle the relay<br>
+                                                if (millis() - last > 250) <br>
+                                                {<br>
+                                                    on=!on;<br>
+                                                    digitalWrite(8,on?HIGH:LOW);<br>
+                                                    digitalWrite(13,on?HIGH:LOW);<br>
+                                                    dump(&results);<br>
+                                                }<br>
+                                                if(results.value==btn1)<br>
+                                                {<br>
+                                                    if(LEDon[0] == 1)// if first led is on then <br>
+                                                    {        <br>
+                                                        digitalWrite(LED1, LOW);// turn it off when button is pressed<br>
+                                                        LEDon[0] = 0;// and set its state as off<br>
+                                                    } <br>
+                                                    else// else if first led is off<br>
+                                                    {                      <br>
+                                                        digitalWrite(LED1, HIGH); // turn it on when the button is pressed<br>
+                                                        LEDon[0] = 1;// and set its state as on<br>
+                                                    }<br>
+                                                }<br>
+                                                if(results.value==btn2)<br>
+                                                {<br>
+                                                    if(LEDon[1] == 1)// if second led is on then <br>
+                                                    {        <br>
+                                                        digitalWrite(LED2, LOW);// turn it off when button is pressed<br>
+                                                        LEDon[1] = 0;// and set its state as off<br>
+                                                    } <br>
+                                                    else// else if second led is off<br>
+                                                    {                      <br>
+                                                        digitalWrite(LED2, HIGH); // turn it on when the button is pressed<br>
+                                                        LEDon[1] = 1;// and set its state as on<br>
+                                                    }<br>
+                                                }<br>
+                                                if(results.value==btn3)<br>
+                                                {<br>
+                                                    if(LEDon[2] == 1)// if third led is on then <br>
+                                                    {        <br>
+                                                        digitalWrite(LED3, LOW);// turn it off when button is pressed<br>
+                                                        LEDon[2] = 0;// and set its state as off<br>
+                                                    } <br>
+                                                    else// else if third led is off<br>
+                                                    {                      <br>
+                                                        digitalWrite(LED3, HIGH); // turn it on when the button is pressed<br>
+                                                        LEDon[2] = 1;// and set its state as on<br>
+                                                    }<br>
+                                                }<br>
+                                                if(results.value==btn4)<br>
+                                                {<br>
+                                                    if(LEDon[3] == 1)// if fourth led is on then <br>
+                                                    {        <br>
+                                                        digitalWrite(LED4, LOW);// turn it off when button is pressed<br>
+                                                        LEDon[3] = 0;// and set its state as off<br>
+                                                    } <br>
+                                                    else// else if fourth led is off<br>
+                                                    {                      <br>
+                                                        digitalWrite(LED4, HIGH); // turn it on when the button is pressed<br>
+                                                        LEDon[3] = 1;// and set its state as on<br>
+                                                    }<br>
+                                                }<br>
+                                                if(results.value==btn5)<br>
+                                                {<br>
+                                                    if(LEDon[4] == 1)// if fifth led is on then <br>
+                                                    {        <br>
+                                                        digitalWrite(LED5, LOW);// turn it off when button is pressed<br>
+                                                        LEDon[4] = 0;// and set its state as off<br>
+                                                    } <br>
+                                                    else// else if fifth led is off<br>
+                                                    {                      <br>
+                                                        digitalWrite(LED5, HIGH); // turn it on when the button is pressed<br>
+                                                        LEDon[4] = 1;// and set its state as on<br>
+                                                    }<br>
+                                                }<br>
+                                                if(results.value==btn6)<br>
+                                                {<br>
+                                                    if(LEDon[5] == 1)// if sixth led is on then <br>
+                                                    {        <br>
+                                                        digitalWrite(LED6, LOW);// turn it off when button is pressed<br>
+                                                        LEDon[5] = 0;// and set its state as off<br>
+                                                    } <br>
+                                                    else// else if sixth led is off<br>
+                                                    {                      <br>
+                                                        digitalWrite(LED6, HIGH); // turn it on when the button is pressed<br>
+                                                        LEDon[5] = 1;// and set its state as on<br>
+                                                    }<br>
+                                                }<br>
+                                                <br>        
+                                                last = millis();  <br>    
+                                                irrecv.resume(); // Receive the next value<br>
+                                            }<br>
                                         }
                                 </p>
                             </div>
@@ -784,7 +841,7 @@
                                 <h1>Output</h1>
                                 <p></p>
                                 <video controls loop class="video" >
-                                    <source src="output videos/exp10.mp4" >
+                                    <source src="vedios/irremote.mp4" >
                                 </video>
                             </div>
                         </div>
