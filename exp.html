@@ -1124,12 +1124,82 @@ void loop() {<br>
                             </div>
                             <div class="assigndetails">
                                 <h1>Circuit Diagram</h1>
-                                <img src="images/as1.png" alt="circuit13">
+                                <img src="images/as2.png" alt="circuit13">
                             </div>
                             <div class="expdetails">
                                 <h1>Code</h1>
                                 <p class="code">
-                                    int a = 7;// set digital pin 7 for segment a<br>
+                                    int ldrsensor = 0;// initialize analog pin 0, connected with ldr<br>
+int ledpin = 11;// initialize digital pin 11<br>
+int val;// declare variable val<br>
+int threshold = 1000;// declare threshold value<br>
+                                                   <br>                             
+void setup() <br>
+{<br>
+    pinMode(ledpin, OUTPUT);// set digital pin 11 as “output”<br>
+    Serial.begin(9600);// set baud rate at “9600”<br>
+}<br>
+     <br>                                                                           
+void loop()<br> 
+{<br>
+    val = analogRead(ldrsensor);// read the value of the sensor and assign it to val<br>
+    Serial.println(val);// display the value of val<br>
+    if(val>=threshold)//if the light is below the threshold value, the LED will turns on<br>
+    {<br>
+        digitalWrite(ledpin, HIGH);<br>
+        delay(2000);<br>
+    }<br>
+    else// otherwise the LED is off<br>
+    {<br>
+        digitalWrite(ledpin, LOW);<br>
+        delay(1000);<br>
+    }<br>
+}
+   
+                                   
+                                </p>
+                            </div>
+                            <div class="assigndetails">
+                                <h1>Output</h1>
+                                <p>Digital Dice using 7 Segment Display and Push Button is created.</p>
+                                <video controls loop class="video">
+                                    <source src="vedios/exp14.mp4" >
+                                </video> 
+                            </div>
+                        </div>
+        
+                        <!--assignment 02-->
+                        <div class="accordion-item" id="assign2">
+                            <a class="accordion-link" href="#assign2">
+                                Assignment 2
+                                <ion-icon name="chevron-up-outline" class="up"></ion-icon>
+                                <ion-icon name="chevron-down-outline" class="down"></ion-icon>
+                            </a>
+                            <div class="assigndetails">
+                                <h1> Digital Dice using 7 Segment Display and Push Button</h1>
+                                <p>To create a digital dice using 7 Segment Display and a push button.</p>
+                            </div>
+                            <div class="expdetails">
+                                <h1>Components Required</h1>
+                                <p>
+                                    >>>  Arduino Uno Board<br>
+                                    >>>  USB Cable<br>
+                                    >>>  1-digit LED Segment Display x 1 Nos<br>
+                                    >>>  Push Button x 1 Nos<br>
+                                    >>>  220Ω Resistor x 8 Nos<br>
+                                    >>>  10KΩ Resistor x 1 Nos<br>
+                                    >>>  Breadboard<br>
+                                    >>>  Jumper wires (Male to Male) x several Nos<br>
+                                </p>
+                            </div>
+                            <div class="assigndetails">
+                                <h1>Circuit Diagram</h1>
+                                <img src="images/as1.png" alt="circuit14">
+                            </div>
+                            <div class="expdetails">
+                                <h1>Code</h1>
+                                <p class="code">
+                                     int a = 7;// set digital pin 7 for segment a<br>
 int b = 6;// set digital pin 6 for segment b<br>
 int c = 5;// set digital pin 5 for segment c<br>
 int d = 10;// set digital pin 10 for segment d<br>
@@ -1271,51 +1341,6 @@ void loop() <br>
                                 <p>Digital Dice using 7 Segment Display and Push Button is created.</p>
                                 <video controls loop class="video">
                                     <source src="vedios/exp13.mp4" >
-                                </video> 
-                            </div>
-                        </div>
-        
-                        <!--assignment 02-->
-                        <div class="accordion-item" id="assign2">
-                            <a class="accordion-link" href="#assign2">
-                                Assignment 2
-                                <ion-icon name="chevron-up-outline" class="up"></ion-icon>
-                                <ion-icon name="chevron-down-outline" class="down"></ion-icon>
-                            </a>
-                            <div class="assigndetails">
-                                <h1>Title</h1>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis, commodi nam delectus eius obcaecati voluptatem provident soluta earum itaque sit fuga. Facilis fugiat vitae est odit? Quam maxime provident quidem.</p>
-                            </div>
-                            <div class="expdetails">
-                                <h1>Components Required</h1>
-                                <p>
-                                    >>>  Arduino board *1<br>
-                                    >>>  USB cable *1
-                                </p>
-                            </div>
-                            <div class="assigndetails">
-                                <h1>Circuit Diagram</h1>
-                                <img src="circuit images/circuit14.PNG" alt="circuit14">
-                            </div>
-                            <div class="expdetails">
-                                <h1>Code</h1>
-                                <p class="code">
-                                    void setup()<br>
-                                    {<br>
-                                    
-                                    }<br>
-                                    <br>
-                                    void loop()<br>
-                                    {<br>
-                                    
-                                    }
-                                </p>
-                            </div>
-                            <div class="assigndetails">
-                                <h1>Output</h1>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod odit obcaecati aspernatur recusandae, consequuntur quisquam reprehenderit, reiciendis praesentium tenetur assumenda facilis a laboriosam voluptates! Dolorem ipsum cumque dicta corrupti doloribus.</p>
-                                <video controls loop class="video">
-                                    <source src="output videos/exp14.mp4" >
                                 </video>
                             </div>
                         </div>
